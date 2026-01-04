@@ -1,0 +1,1401 @@
+/* Nmap Syntax Highlight Plugin Styles */
+
+/* Container */
+.nmap-output {
+    font-family: 'Fira Code', 'JetBrains Mono', 'Consolas', 'Monaco', monospace;
+    font-size: 0.9em;
+    line-height: 1.5;
+}
+
+.nmap-pre {
+    position: relative; /* Positioning context for copy button */
+    background-color: var(--code-background);
+    border-radius: 6px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 0;
+}
+
+.nmap-code {
+    display: block;
+    white-space: pre;
+}
+
+.nmap-line {
+    display: inline;
+}
+
+/* Header lines (Nmap scan report, Starting Nmap, etc.) */
+.nmap-header {
+    color: #61afef;
+    font-weight: bold;
+}
+
+/* Port numbers */
+.nmap-port {
+    color: #d19a66;
+    font-weight: 600;
+}
+
+/* Critical ports - extra emphasis */
+.nmap-port-critical {
+    color: #e06c75;
+    font-weight: bold;
+    text-shadow: 0 0 2px rgba(224, 108, 117, 0.5);
+}
+
+/* Protocol (tcp/udp) */
+.nmap-protocol {
+    color: #abb2bf;
+}
+
+/* Port states */
+.nmap-state-open {
+    color: #98c379;
+    font-weight: bold;
+    background-color: rgba(152, 195, 121, 0.15);
+    padding: 1px 4px;
+    border-radius: 3px;
+}
+
+.nmap-state-closed {
+    color: #e06c75;
+    background-color: rgba(224, 108, 117, 0.15);
+    padding: 1px 4px;
+    border-radius: 3px;
+}
+
+.nmap-state-filtered {
+    color: #e5c07b;
+    background-color: rgba(229, 192, 123, 0.15);
+    padding: 1px 4px;
+    border-radius: 3px;
+}
+
+/* Service names */
+.nmap-service {
+    color: #c678dd;
+    font-weight: 500;
+}
+
+/* Version information */
+.nmap-version {
+    color: #56b6c2;
+    font-style: italic;
+}
+
+/* OS detection */
+.nmap-os {
+    color: #e5c07b;
+    background-color: rgba(229, 192, 123, 0.1);
+    display: inline-block;
+    padding: 2px 0;
+}
+
+/* IP addresses */
+.nmap-ip {
+    color: #61afef;
+    font-weight: 500;
+}
+
+/* MAC addresses */
+.nmap-mac {
+    color: #d19a66;
+}
+
+/* Vendor info */
+.nmap-vendor {
+    color: #abb2bf;
+    font-style: italic;
+}
+
+/* Hostnames */
+.nmap-hostname {
+    color: #61afef;
+    font-weight: 500;
+}
+
+/* IPv6 addresses */
+.nmap-ipv6 {
+    color: #56b6c2;
+    font-weight: 500;
+}
+
+/* Reverse DNS */
+.nmap-rdns {
+    color: #abb2bf;
+    font-style: italic;
+    opacity: 0.9;
+}
+
+/* CPE identifiers */
+.nmap-cpe {
+    color: #5c6370;
+    font-size: 0.9em;
+    font-family: 'Fira Code', 'JetBrains Mono', 'Consolas', monospace;
+}
+
+/* Port state reasons */
+.nmap-reason {
+    color: #abb2bf;
+    font-size: 0.9em;
+    opacity: 0.8;
+}
+
+/* Traceroute hop numbers */
+.nmap-traceroute-hop {
+    color: #d19a66;
+    font-weight: 600;
+}
+
+/* Traceroute RTT timing */
+.nmap-traceroute-rtt {
+    color: #98c379;
+    font-weight: 500;
+}
+
+/* Labels */
+.nmap-label {
+    color: #abb2bf;
+}
+
+/* Service info line */
+.nmap-service-info {
+    color: #56b6c2;
+}
+
+/* Script output */
+.nmap-script {
+    color: #abb2bf;
+    padding-left: 4px;
+    border-left: 2px solid var(--interactive-accent);
+}
+
+.nmap-script-interesting {
+    color: #e5c07b;
+    font-weight: 500;
+    padding-left: 4px;
+    border-left: 2px solid #e5c07b;
+    background-color: rgba(229, 192, 123, 0.1);
+}
+
+/* Vulnerabilities - HIGH VISIBILITY */
+.nmap-vuln {
+    color: #e06c75;
+    font-weight: bold;
+    background-color: rgba(224, 108, 117, 0.2);
+    padding: 2px 6px;
+    border-radius: 3px;
+    border-left: 3px solid #e06c75;
+    display: inline-block;
+    animation: vuln-pulse 2s ease-in-out infinite;
+}
+
+@keyframes vuln-pulse {
+    0%, 100% { background-color: rgba(224, 108, 117, 0.2); }
+    50% { background-color: rgba(224, 108, 117, 0.35); }
+}
+
+/* CVE/MS/CWE identifiers - MAXIMUM VISIBILITY */
+.nmap-cve {
+    color: #ff6b6b;
+    font-weight: bold;
+    font-family: 'Fira Code', 'JetBrains Mono', 'Consolas', monospace;
+    background: linear-gradient(135deg, rgba(255, 107, 107, 0.3) 0%, rgba(224, 108, 117, 0.4) 100%);
+    padding: 3px 8px;
+    border-radius: 4px;
+    border: 2px solid #e06c75;
+    display: inline-block;
+    box-shadow: 0 0 8px rgba(224, 108, 117, 0.6), 0 0 16px rgba(224, 108, 117, 0.3);
+    animation: cve-glow 1.5s ease-in-out infinite;
+    text-shadow: 0 0 2px rgba(255, 107, 107, 0.5);
+}
+
+@keyframes cve-glow {
+    0%, 100% {
+        box-shadow: 0 0 8px rgba(224, 108, 117, 0.6), 0 0 16px rgba(224, 108, 117, 0.3);
+        border-color: #e06c75;
+    }
+    50% {
+        box-shadow: 0 0 12px rgba(255, 107, 107, 0.8), 0 0 24px rgba(224, 108, 117, 0.5);
+        border-color: #ff6b6b;
+    }
+}
+
+/* Severity levels */
+.nmap-severity-critical {
+    color: #e06c75;
+    font-weight: bold;
+    background-color: rgba(224, 108, 117, 0.25);
+    padding: 2px 6px;
+    border-radius: 3px;
+    border-left: 3px solid #e06c75;
+}
+
+.nmap-severity-high {
+    color: #e5c07b;
+    font-weight: bold;
+    background-color: rgba(229, 192, 123, 0.2);
+    padding: 2px 6px;
+    border-radius: 3px;
+    border-left: 3px solid #e5c07b;
+}
+
+.nmap-severity-medium {
+    color: #d19a66;
+    font-weight: 500;
+    background-color: rgba(209, 154, 102, 0.15);
+    padding: 2px 6px;
+    border-radius: 3px;
+    border-left: 3px solid #d19a66;
+}
+
+.nmap-severity-low {
+    color: #61afef;
+    background-color: rgba(97, 175, 239, 0.15);
+    padding: 2px 6px;
+    border-radius: 3px;
+    border-left: 3px solid #61afef;
+}
+
+/* Line numbering */
+.nmap-line-numbered {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+}
+
+.nmap-line-number {
+    color: var(--text-faint);
+    text-align: right;
+    padding-right: 12px;
+    min-width: 40px;
+    user-select: none;
+    opacity: 0.5;
+    font-size: 0.85em;
+    flex-shrink: 0;
+}
+
+.nmap-line-number:hover {
+    opacity: 0.8;
+}
+
+/* Copy button - positioned top-left to avoid Obsidian's edit button */
+.nmap-copy-button {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    padding: 8px 16px;
+    min-height: 36px; /* Improved touch target */
+    background-color: var(--interactive-accent);
+    color: var(--text-on-accent);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.85em;
+    font-weight: 500;
+    opacity: 0;
+    transition: opacity 0.2s ease, background-color 0.2s ease;
+    z-index: 10;
+}
+
+.nmap-pre:hover .nmap-copy-button {
+    opacity: 0.7;
+}
+
+.nmap-copy-button:hover {
+    opacity: 1 !important;
+    background-color: var(--interactive-accent-hover);
+}
+
+.nmap-copy-button:active {
+    transform: scale(0.95);
+}
+
+.nmap-copy-button.copied {
+    background-color: #98c379;
+    opacity: 1 !important;
+}
+
+/* ==================== */
+/* Filter Toolbar       */
+/* ==================== */
+
+.nmap-filter-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    background-color: var(--background-secondary);
+    border-bottom: 1px solid var(--background-modifier-border);
+    margin-bottom: 8px;
+    border-radius: 6px 6px 0 0;
+    flex-wrap: wrap;
+    user-select: none;
+}
+
+.nmap-filter-label {
+    color: var(--text-muted);
+    font-size: 0.85em;
+    font-weight: 500;
+    margin-right: 4px;
+}
+
+.nmap-filter-btn {
+    padding: 6px 14px;
+    min-height: 36px; /* Improved touch target */
+    background-color: var(--background-primary);
+    color: var(--text-muted);
+    border: 1px solid var(--background-modifier-border);
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8em;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    text-decoration: line-through;
+    opacity: 0.6;
+}
+
+.nmap-filter-btn:hover {
+    border-color: var(--interactive-accent);
+    background-color: var(--background-secondary-alt);
+    opacity: 0.8;
+}
+
+.nmap-filter-btn.active {
+    background-color: var(--interactive-accent);
+    color: var(--text-on-accent);
+    border-color: var(--interactive-accent);
+    text-decoration: none;
+    opacity: 1;
+}
+
+.nmap-filter-btn.active:hover {
+    background-color: var(--interactive-accent-hover);
+}
+
+/* Hidden lines */
+.nmap-line-hidden,
+.nmap-line-numbered.nmap-line-hidden,
+br.nmap-line-hidden {
+    display: none !important;
+}
+
+/* ==================== */
+/* Summary Box Styles   */
+/* ==================== */
+
+.nmap-summary {
+    background-color: var(--background-secondary);
+    border: 1px solid var(--background-modifier-border);
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin: 12px 0;
+    font-family: var(--font-interface);
+}
+
+.nmap-summary-title {
+    font-size: 1.1em;
+    font-weight: 600;
+    color: var(--text-normal);
+    margin-bottom: 10px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--background-modifier-border);
+}
+
+.nmap-summary-content {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.nmap-summary-line {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.95em;
+}
+
+.nmap-summary-label {
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+.nmap-summary-value {
+    color: var(--text-normal);
+}
+
+.nmap-summary-open {
+    color: #98c379;
+    font-weight: bold;
+}
+
+.nmap-summary-closed {
+    color: #e06c75;
+}
+
+.nmap-summary-filtered {
+    color: #e5c07b;
+}
+
+.nmap-summary-critical {
+    background-color: rgba(224, 108, 117, 0.1);
+    padding: 6px 10px;
+    border-radius: 4px;
+    border-left: 3px solid #e06c75;
+}
+
+.nmap-summary-critical .nmap-summary-value {
+    color: #e06c75;
+    font-weight: 500;
+}
+
+.nmap-summary-vuln {
+    background-color: rgba(224, 108, 117, 0.15);
+    padding: 6px 10px;
+    border-radius: 4px;
+    border-left: 3px solid #e06c75;
+}
+
+/* ========================================= */
+/* Per-Host Grouped Summary Styles           */
+/* ========================================= */
+
+/*
+ * HTML Structure:
+ *
+ * <div class="nmap-summary">
+ *   <div class="nmap-summary-title">Scan Summary</div>
+ *   <div class="nmap-summary-content">
+ *
+ *     <!-- Global stats section -->
+ *     <div class="nmap-summary-global">
+ *       <div class="nmap-summary-line">
+ *         <span class="nmap-summary-label">Total Hosts:</span>
+ *         <span class="nmap-summary-value">3</span>
+ *       </div>
+ *     </div>
+ *
+ *     <!-- Optional divider -->
+ *     <div class="nmap-summary-divider"></div>
+ *
+ *     <!-- Container for all hosts -->
+ *     <div class="nmap-summary-hosts">
+ *
+ *       <!-- Individual host section (collapsible) -->
+ *       <div class="nmap-host-section">
+ *         <div class="nmap-host-header">
+ *           <div class="nmap-host-header-left">
+ *             <span class="nmap-host-header-hostname">example.com</span>
+ *             <span class="nmap-host-header-ip">192.168.1.100</span>
+ *             <span class="nmap-host-header-badge">3 PORTS</span>
+ *           </div>
+ *           <span class="nmap-host-header-toggle">▼</span>
+ *         </div>
+ *
+ *         <div class="nmap-host-details">
+ *           <div class="nmap-host-stat">
+ *             <span class="nmap-host-stat-label">Open Ports:</span>
+ *             <div class="nmap-host-stat-ports">
+ *               <span class="nmap-host-stat-port open">22/tcp</span>
+ *               <span class="nmap-host-stat-port open critical">80/tcp</span>
+ *             </div>
+ *           </div>
+ *
+ *           <div class="nmap-host-stat">
+ *             <span class="nmap-host-stat-label">OS:</span>
+ *             <span class="nmap-host-stat-os">Linux 5.4</span>
+ *           </div>
+ *
+ *           <div class="nmap-host-stat">
+ *             <span class="nmap-host-stat-label">Vulnerabilities:</span>
+ *             <span class="nmap-host-stat-vuln">CVE-2021-1234</span>
+ *           </div>
+ *         </div>
+ *       </div>
+ *
+ *     </div>
+ *   </div>
+ * </div>
+ *
+ * Features:
+ * - Collapsible host sections (add .collapsed class to .nmap-host-section)
+ * - Hover effects on host sections and ports
+ * - Color-coded port states (open=green, closed=red, filtered=orange)
+ * - Critical port highlighting with glow effect
+ * - Mobile responsive with stacked layout
+ * - Print-friendly (expands all sections, hides toggle buttons)
+ */
+
+/* Global statistics section at top of summary */
+.nmap-summary-global {
+    background-color: var(--background-primary);
+    border: 1px solid var(--background-modifier-border);
+    border-radius: 6px;
+    padding: 10px 14px;
+    margin-bottom: 12px;
+    border-left: 3px solid #61afef;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.95em;
+}
+
+.nmap-summary-global .nmap-summary-label {
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+.nmap-summary-global .nmap-summary-value {
+    color: var(--text-normal);
+    font-weight: 500;
+}
+
+/* Container for all host sections */
+.nmap-summary-hosts {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+/* Individual host section */
+.nmap-host-section {
+    background-color: var(--background-primary);
+    border: 1px solid var(--background-modifier-border);
+    border-radius: 6px;
+    padding: 0;
+    overflow: hidden;
+    transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.nmap-host-section:hover {
+    border-color: var(--interactive-accent);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Host header with hostname and IP */
+.nmap-host-header {
+    background-color: var(--background-secondary);
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--background-modifier-border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.2s ease;
+}
+
+.nmap-host-header:hover {
+    background-color: var(--background-secondary-alt);
+}
+
+.nmap-host-header-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    flex: 1;
+    min-width: 0;
+}
+
+.nmap-host-header-hostname {
+    color: #61afef;
+    font-weight: 600;
+    font-size: 1em;
+    font-family: 'Fira Code', 'JetBrains Mono', 'Consolas', monospace;
+    word-break: break-all;
+}
+
+.nmap-host-header-ip {
+    color: #56b6c2;
+    font-weight: 500;
+    font-size: 0.9em;
+    font-family: 'Fira Code', 'JetBrains Mono', 'Consolas', monospace;
+    opacity: 0.9;
+}
+
+.nmap-host-header-badge {
+    background-color: rgba(97, 175, 239, 0.15);
+    color: #61afef;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 0.75em;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Collapsible indicator */
+.nmap-host-header-toggle {
+    color: var(--text-muted);
+    font-size: 0.9em;
+    transition: transform 0.2s ease;
+    flex-shrink: 0;
+}
+
+.nmap-host-section.collapsed .nmap-host-header-toggle {
+    transform: rotate(-90deg);
+}
+
+/* Container for host details */
+.nmap-host-details {
+    padding: 12px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.nmap-host-section.collapsed .nmap-host-details {
+    display: none;
+}
+
+/* Individual stat line within a host */
+.nmap-host-stat {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.9em;
+    padding: 4px 0;
+    flex-wrap: wrap;
+}
+
+.nmap-host-stat-label {
+    color: var(--text-muted);
+    font-weight: 500;
+    min-width: 100px;
+}
+
+.nmap-host-stat-value {
+    color: var(--text-normal);
+    flex: 1;
+}
+
+/* Special styling for port lists */
+.nmap-host-stat-ports {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 4px;
+}
+
+.nmap-host-stat-port {
+    font-family: 'Fira Code', 'JetBrains Mono', 'Consolas', monospace;
+    font-size: 0.85em;
+    padding: 3px 8px;
+    border-radius: 4px;
+    background-color: var(--background-secondary);
+    border: 1px solid var(--background-modifier-border);
+    transition: all 0.2s ease;
+}
+
+.nmap-host-stat-port:hover {
+    border-color: var(--interactive-accent);
+    transform: translateY(-1px);
+}
+
+.nmap-host-stat-port.open {
+    color: #98c379;
+    border-color: rgba(152, 195, 121, 0.4);
+    background-color: rgba(152, 195, 121, 0.1);
+}
+
+.nmap-host-stat-port.closed {
+    color: #e06c75;
+    border-color: rgba(224, 108, 117, 0.4);
+    background-color: rgba(224, 108, 117, 0.1);
+}
+
+.nmap-host-stat-port.filtered {
+    color: #e5c07b;
+    border-color: rgba(229, 192, 123, 0.4);
+    background-color: rgba(229, 192, 123, 0.1);
+}
+
+.nmap-host-stat-port.critical {
+    font-weight: bold;
+    box-shadow: 0 0 4px rgba(224, 108, 117, 0.3);
+}
+
+/* OS detection in host section */
+.nmap-host-stat-os {
+    color: #e5c07b;
+    font-style: italic;
+    background-color: rgba(229, 192, 123, 0.1);
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-family: 'Fira Code', 'JetBrains Mono', 'Consolas', monospace;
+    font-size: 0.85em;
+}
+
+/* Vulnerability highlights in host section */
+.nmap-host-stat-vuln {
+    color: #e06c75;
+    font-weight: bold;
+    background-color: rgba(224, 108, 117, 0.15);
+    padding: 4px 10px;
+    border-radius: 4px;
+    border-left: 3px solid #e06c75;
+    font-family: 'Fira Code', 'JetBrains Mono', 'Consolas', monospace;
+    font-size: 0.85em;
+}
+
+/* Visual divider between sections */
+.nmap-summary-divider {
+    height: 1px;
+    background: linear-gradient(
+        to right,
+        transparent,
+        var(--background-modifier-border) 20%,
+        var(--background-modifier-border) 80%,
+        transparent
+    );
+    margin: 12px 0;
+}
+
+/* Simplified per-host summary styles (used by renderSummary) */
+.nmap-expand-icon {
+    color: var(--text-muted);
+    font-size: 1em;
+    margin-right: 4px;
+    display: inline-block;
+    transition: transform 0.2s ease;
+}
+
+.nmap-host-line {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.9em;
+    margin: 4px 0;
+    padding: 2px 0;
+}
+
+.nmap-summary-label-indent {
+    color: var(--text-muted);
+    font-weight: 500;
+    margin-left: 4px;
+}
+
+.nmap-host-vuln {
+    background-color: rgba(224, 108, 117, 0.08);
+    padding: 6px 8px;
+    margin: 2px -8px;
+    border-radius: 4px;
+    border-left: 2px solid #e06c75;
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 768px) {
+    .nmap-host-header {
+        padding: 8px 12px;
+    }
+
+    .nmap-host-header-left {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+    }
+
+    .nmap-host-header-hostname {
+        font-size: 0.95em;
+    }
+
+    .nmap-host-header-ip {
+        font-size: 0.85em;
+    }
+
+    .nmap-host-details {
+        padding: 10px 12px;
+    }
+
+    .nmap-host-stat {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+    }
+
+    .nmap-host-stat-label {
+        min-width: auto;
+        font-size: 0.85em;
+    }
+
+    .nmap-host-stat-value {
+        font-size: 0.85em;
+    }
+
+    .nmap-host-stat-ports {
+        width: 100%;
+    }
+}
+
+/* ==================== */
+/* /etc/hosts Section   */
+/* ==================== */
+
+.nmap-etc-hosts-section {
+    margin: 12px 0;
+    padding: 10px 12px;
+    background-color: var(--background-primary);
+    border: 1px solid var(--background-modifier-border);
+    border-radius: 6px;
+    border-left: 3px solid #61afef;
+}
+
+.nmap-etc-hosts-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.nmap-etc-hosts-title {
+    font-family: 'Fira Code', 'JetBrains Mono', 'Consolas', monospace;
+    font-size: 0.9em;
+    font-weight: 600;
+    color: #61afef;
+}
+
+.nmap-etc-hosts-copy {
+    padding: 3px 10px;
+    background-color: var(--interactive-accent);
+    color: var(--text-on-accent);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8em;
+    font-weight: 500;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.nmap-etc-hosts-copy:hover {
+    background-color: var(--interactive-accent-hover);
+}
+
+.nmap-etc-hosts-copy:active {
+    transform: scale(0.95);
+}
+
+.nmap-etc-hosts-copy.copied {
+    background-color: #98c379;
+}
+
+.nmap-etc-hosts-code {
+    font-family: 'Fira Code', 'JetBrains Mono', 'Consolas', monospace;
+    font-size: 0.85em;
+    line-height: 1.6;
+    background-color: var(--code-background);
+    padding: 10px 12px;
+    border-radius: 4px;
+    overflow-x: auto;
+}
+
+.nmap-etc-hosts-line {
+    display: block;
+    white-space: pre;
+}
+
+.nmap-etc-hosts-line .nmap-ip,
+.nmap-etc-hosts-line .nmap-ipv6 {
+    min-width: 120px;
+    display: inline-block;
+}
+
+.nmap-summary-vuln .nmap-summary-label {
+    color: #e06c75;
+}
+
+.nmap-summary-vuln .nmap-summary-value {
+    color: #e06c75;
+    font-weight: bold;
+}
+
+/* ==================== */
+/* Light Theme Support  */
+/* ==================== */
+
+/* Per-Host Summary Light Theme */
+.theme-light .nmap-summary-global {
+    border-left-color: #0366d6;
+}
+
+.theme-light .nmap-host-header-hostname {
+    color: #0366d6;
+}
+
+.theme-light .nmap-host-header-ip {
+    color: #0086b3;
+}
+
+.theme-light .nmap-host-header-badge {
+    background-color: rgba(3, 102, 214, 0.15);
+    color: #0366d6;
+}
+
+.theme-light .nmap-host-stat-port.open {
+    color: #22863a;
+    border-color: rgba(34, 134, 58, 0.4);
+    background-color: rgba(34, 134, 58, 0.1);
+}
+
+.theme-light .nmap-host-stat-port.closed {
+    color: #cb2431;
+    border-color: rgba(203, 36, 49, 0.4);
+    background-color: rgba(203, 36, 49, 0.1);
+}
+
+.theme-light .nmap-host-stat-port.filtered {
+    color: #b76b01;
+    border-color: rgba(183, 107, 1, 0.4);
+    background-color: rgba(183, 107, 1, 0.1);
+}
+
+.theme-light .nmap-host-stat-port.critical {
+    box-shadow: 0 0 4px rgba(203, 36, 49, 0.3);
+}
+
+.theme-light .nmap-host-stat-os {
+    color: #735c0f;
+    background-color: rgba(115, 92, 15, 0.1);
+}
+
+.theme-light .nmap-host-stat-vuln {
+    color: #cb2431;
+    background-color: rgba(203, 36, 49, 0.15);
+    border-left-color: #cb2431;
+}
+
+.theme-light .nmap-header {
+    color: #0366d6;
+}
+
+.theme-light .nmap-port {
+    color: #b76b01;
+}
+
+.theme-light .nmap-port-critical {
+    color: #cb2431;
+    text-shadow: none;
+}
+
+.theme-light .nmap-state-open {
+    color: #22863a;
+    background-color: rgba(34, 134, 58, 0.15);
+}
+
+.theme-light .nmap-state-closed {
+    color: #cb2431;
+    background-color: rgba(203, 36, 49, 0.15);
+}
+
+.theme-light .nmap-state-filtered {
+    color: #b76b01;
+    background-color: rgba(183, 107, 1, 0.15);
+}
+
+.theme-light .nmap-service {
+    color: #6f42c1;
+}
+
+.theme-light .nmap-version {
+    color: #0086b3;
+}
+
+.theme-light .nmap-os {
+    color: #735c0f;
+    background-color: rgba(115, 92, 15, 0.1);
+}
+
+.theme-light .nmap-ip {
+    color: #0366d6;
+}
+
+.theme-light .nmap-hostname {
+    color: #0366d6;
+}
+
+.theme-light .nmap-ipv6 {
+    color: #0086b3;
+}
+
+.theme-light .nmap-rdns {
+    color: #6a737d;
+}
+
+.theme-light .nmap-cpe {
+    color: #6a737d;
+}
+
+.theme-light .nmap-reason {
+    color: #6a737d;
+}
+
+.theme-light .nmap-traceroute-hop {
+    color: #b76b01;
+}
+
+.theme-light .nmap-traceroute-rtt {
+    color: #22863a;
+}
+
+.theme-light .nmap-vuln {
+    color: #cb2431;
+    background-color: rgba(203, 36, 49, 0.15);
+    border-left-color: #cb2431;
+}
+
+.theme-light .nmap-cve {
+    color: #d73a49;
+    background: linear-gradient(135deg, rgba(215, 58, 73, 0.2) 0%, rgba(203, 36, 49, 0.3) 100%);
+    border-color: #cb2431;
+    box-shadow: 0 0 6px rgba(203, 36, 49, 0.4), 0 0 12px rgba(203, 36, 49, 0.2);
+    text-shadow: none;
+}
+
+@keyframes cve-glow-light {
+    0%, 100% {
+        box-shadow: 0 0 6px rgba(203, 36, 49, 0.4), 0 0 12px rgba(203, 36, 49, 0.2);
+        border-color: #cb2431;
+    }
+    50% {
+        box-shadow: 0 0 10px rgba(215, 58, 73, 0.6), 0 0 20px rgba(203, 36, 49, 0.4);
+        border-color: #d73a49;
+    }
+}
+
+.theme-light .nmap-cve {
+    animation: cve-glow-light 1.5s ease-in-out infinite;
+}
+
+.theme-light .nmap-script-interesting {
+    color: #735c0f;
+    border-left-color: #735c0f;
+    background-color: rgba(115, 92, 15, 0.1);
+}
+
+.theme-light .nmap-summary-open {
+    color: #22863a;
+}
+
+.theme-light .nmap-summary-closed {
+    color: #cb2431;
+}
+
+.theme-light .nmap-summary-filtered {
+    color: #b76b01;
+}
+
+.theme-light .nmap-summary-critical .nmap-summary-value,
+.theme-light .nmap-summary-vuln .nmap-summary-label,
+.theme-light .nmap-summary-vuln .nmap-summary-value {
+    color: #cb2431;
+}
+
+.theme-light .nmap-severity-critical {
+    color: #cb2431;
+    background-color: rgba(203, 36, 49, 0.15);
+    border-left-color: #cb2431;
+}
+
+.theme-light .nmap-severity-high {
+    color: #b76b01;
+    background-color: rgba(183, 107, 1, 0.15);
+    border-left-color: #b76b01;
+}
+
+.theme-light .nmap-severity-medium {
+    color: #e36209;
+    background-color: rgba(227, 98, 9, 0.15);
+    border-left-color: #e36209;
+}
+
+.theme-light .nmap-severity-low {
+    color: #0366d6;
+    background-color: rgba(3, 102, 214, 0.15);
+    border-left-color: #0366d6;
+}
+
+.theme-light .nmap-copy-button.copied {
+    background-color: #22863a;
+}
+
+.theme-light .nmap-etc-hosts-section {
+    border-left-color: #0366d6;
+}
+
+.theme-light .nmap-etc-hosts-title {
+    color: #0366d6;
+}
+
+.theme-light .nmap-etc-hosts-copy.copied {
+    background-color: #22863a;
+}
+
+/* ==================== */
+/* Print Styles         */
+/* ==================== */
+
+@media print {
+    .nmap-state-open {
+        border: 1px solid #22863a;
+    }
+
+    .nmap-state-closed {
+        border: 1px solid #cb2431;
+    }
+
+    .nmap-vuln {
+        border: 2px solid #cb2431;
+    }
+
+    .nmap-summary {
+        border: 1px solid #333;
+    }
+
+    .nmap-summary-global,
+    .nmap-host-section {
+        border: 1px solid #333;
+        page-break-inside: avoid;
+    }
+
+    .nmap-host-section {
+        margin-bottom: 12px;
+    }
+
+    .nmap-host-header-toggle {
+        display: none;
+    }
+
+    .nmap-host-section.collapsed .nmap-host-details {
+        display: flex !important;
+    }
+
+    .nmap-host-stat-port {
+        border: 1px solid #999;
+    }
+
+    .nmap-host-stat-port.open {
+        border-color: #22863a;
+    }
+
+    .nmap-host-stat-port.closed {
+        border-color: #cb2431;
+    }
+
+    .nmap-host-stat-port.filtered {
+        border-color: #b76b01;
+    }
+
+    .nmap-etc-hosts-section {
+        border: 1px solid #333;
+        page-break-inside: avoid;
+    }
+
+    .nmap-etc-hosts-copy,
+    .nmap-copy-button,
+    .nmap-filter-toolbar {
+        display: none;
+    }
+
+    /* Remove shadows and text-shadows for print */
+    .nmap-vuln,
+    .nmap-cve,
+    .nmap-port-critical,
+    .nmap-severity-critical,
+    .nmap-severity-high {
+        box-shadow: none !important;
+        text-shadow: none !important;
+        animation: none !important;
+    }
+}
+
+/* ==================== */
+/* Accessibility        */
+/* ==================== */
+
+/* Reduced motion for users with vestibular disorders */
+@media (prefers-reduced-motion: reduce) {
+    .nmap-vuln,
+    .nmap-cve,
+    .nmap-severity-critical,
+    .nmap-severity-high,
+    .nmap-severity-medium,
+    .nmap-severity-low,
+    * {
+        animation: none !important;
+        transition: none !important;
+    }
+}
+
+/* Keyboard focus states */
+.nmap-copy-button:focus-visible,
+.nmap-etc-hosts-copy:focus-visible,
+.nmap-filter-btn:focus-visible,
+.nmap-host-header:focus-visible {
+    outline: 2px solid var(--interactive-accent);
+    outline-offset: 2px;
+}
+
+.nmap-host-header:focus-visible {
+    border-radius: 4px;
+}
+
+/* ==================== */
+/* Warning/Error Lines  */
+/* ==================== */
+
+.nmap-warning {
+    color: #e5c07b;
+    font-weight: 500;
+    background-color: rgba(229, 192, 123, 0.15);
+    padding: 2px 6px;
+    border-radius: 3px;
+    border-left: 3px solid #e5c07b;
+}
+
+.nmap-error {
+    color: #e06c75;
+    font-weight: 500;
+    background-color: rgba(224, 108, 117, 0.15);
+    padding: 2px 6px;
+    border-radius: 3px;
+    border-left: 3px solid #e06c75;
+}
+
+.nmap-note {
+    color: #61afef;
+    font-style: italic;
+    opacity: 0.9;
+}
+
+/* ==================== */
+/* Timing/Statistics    */
+/* ==================== */
+
+.nmap-timing {
+    color: #56b6c2;
+    font-family: 'Fira Code', 'JetBrains Mono', 'Consolas', monospace;
+}
+
+.nmap-stats {
+    color: #98c379;
+    background-color: rgba(152, 195, 121, 0.1);
+    padding: 1px 4px;
+    border-radius: 3px;
+}
+
+/* ==================== */
+/* Host Status Badges   */
+/* ==================== */
+
+.nmap-host-up {
+    color: #98c379;
+    font-weight: bold;
+}
+
+.nmap-host-down {
+    color: #e06c75;
+    font-weight: bold;
+}
+
+.nmap-latency {
+    color: #56b6c2;
+    font-size: 0.9em;
+}
+
+/* ==================== */
+/* Color-blind Mode     */
+/* ==================== */
+
+.nmap-colorblind .nmap-state-open::before {
+    content: "✓ ";
+    font-weight: bold;
+}
+
+.nmap-colorblind .nmap-state-closed::before {
+    content: "✗ ";
+    font-weight: bold;
+}
+
+.nmap-colorblind .nmap-state-filtered::before {
+    content: "― ";
+    font-weight: bold;
+}
+
+.nmap-colorblind .nmap-host-up::before {
+    content: "▲ ";
+}
+
+.nmap-colorblind .nmap-host-down::before {
+    content: "▼ ";
+}
+
+.nmap-colorblind .nmap-vuln::before,
+.nmap-colorblind .nmap-cve::before {
+    content: "⚠ ";
+}
+
+.nmap-colorblind .nmap-port-critical::after {
+    content: " ⚡";
+}
+
+/* Light theme adjustments for new elements */
+.theme-light .nmap-warning {
+    color: #b76b01;
+    background-color: rgba(183, 107, 1, 0.1);
+    border-left-color: #b76b01;
+}
+
+.theme-light .nmap-error {
+    color: #cb2431;
+    background-color: rgba(203, 36, 49, 0.1);
+    border-left-color: #cb2431;
+}
+
+.theme-light .nmap-note {
+    color: #0366d6;
+}
+
+.theme-light .nmap-timing {
+    color: #0086b3;
+}
+
+.theme-light .nmap-stats {
+    color: #22863a;
+    background-color: rgba(34, 134, 58, 0.1);
+}
+
+.theme-light .nmap-host-up {
+    color: #22863a;
+}
+
+.theme-light .nmap-host-down {
+    color: #cb2431;
+}
+
+.theme-light .nmap-latency {
+    color: #0086b3;
+}
+
+/* Touch device improvements for better mobile accessibility */
+@media (pointer: coarse) {
+    .nmap-copy-button {
+        min-height: 44px;
+        min-width: 44px;
+        padding: 10px 18px;
+    }
+
+    .nmap-filter-btn {
+        min-height: 44px;
+        padding: 10px 16px;
+    }
+
+    .nmap-host-header {
+        min-height: 44px;
+    }
+}

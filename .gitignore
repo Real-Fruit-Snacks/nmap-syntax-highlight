@@ -1,0 +1,108 @@
+# ===========================================
+# Obsidian Plugin .gitignore
+# For vanilla JavaScript plugins (no build process)
+# ===========================================
+
+# ----- Dependencies -----
+node_modules/
+
+# ----- IDE / Editor -----
+# VS Code
+.vscode/
+
+# JetBrains IDEs (IntelliJ, WebStorm, etc.)
+.idea/
+*.iml
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Vim
+*.swp
+*.swo
+*~
+
+# ----- OS Files -----
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Linux
+.directory
+
+# ----- Build Artifacts -----
+# Source maps (if generated)
+*.map
+
+# TypeScript build info (if using TypeScript in future)
+*.tsbuildinfo
+
+# ----- Logs -----
+*.log
+
+# ----- Environment -----
+.env
+.env.local
+.env.*.local
+
+# ----- Obsidian -----
+# Plugin data file (created at runtime)
+data.json
+
+# ----- Testing -----
+coverage/
+.nyc_output/
+
+# ----- Temporary Files -----
+*.tmp
+*.temp
+*.bak
+
+# ===========================================
+# Development Documentation & Reports
+# (Not needed for community plugin submission)
+# ===========================================
+
+# Claude Code guidance
+CLAUDE.md
+
+# Development notes and references
+CSS_CLASS_SUMMARY.txt
+CSS_VALIDATION.txt
+EXAMPLE_PER_HOST_SUMMARY.md
+PER_HOST_SUMMARY_CSS_REFERENCE.md
+PER_HOST_SUMMARY_IMPLEMENTATION.md
+UI_DESIGN_REFERENCE.md
+VISUAL_MOCKUP.md
+
+# Analysis and fix reports
+plugin_analysis_report.md
+fix_changelog.md
+fix_verification_report.md
+github_release_prep_report.md
+SUBMISSION_CHECKLIST.md
+
+# Development images/screenshots
+double.png
+
+# ===========================================
+# FILES THAT MUST BE COMMITTED
+# (Required for Obsidian Community Plugins)
+# ===========================================
+# - main.js        (plugin source code)
+# - manifest.json  (plugin metadata)
+# - styles.css     (plugin styles)
+# - README.md      (user documentation)
+# - LICENSE        (open source license)
+# - package.json   (npm metadata)
+# - versions.json  (version compatibility)
+# - .github/       (GitHub Actions workflow)
+# ===========================================
