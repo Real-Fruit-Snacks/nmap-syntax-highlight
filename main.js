@@ -1073,11 +1073,11 @@ class NmapSyntaxHighlightPlugin extends Plugin {
                     if (!summary.hostMappings.has(ip)) {
                         summary.hostMappings.set(ip, new Set());
                     }
-                    summary.hostMappings.get(ip).add(hostname);
+                    summary.hostMappings.get(ip).add(hostname.toLowerCase());
                     // Also add parent domain if applicable
                     const parent = extractParentDomain(hostname);
                     if (parent && isValidHostname(parent)) {
-                        summary.hostMappings.get(ip).add(parent);
+                        summary.hostMappings.get(ip).add(parent.toLowerCase());
                     }
                 }
             } else {
@@ -1106,7 +1106,7 @@ class NmapSyntaxHighlightPlugin extends Plugin {
                     if (!summary.hostMappings.has(ip)) {
                         summary.hostMappings.set(ip, new Set());
                     }
-                    summary.hostMappings.get(ip).add(hostname);
+                    summary.hostMappings.get(ip).add(hostname.toLowerCase());
                 }
             }
 
@@ -1188,13 +1188,15 @@ class NmapSyntaxHighlightPlugin extends Plugin {
                     hostSet.add(rdpNbComputerMatch[1].toLowerCase());
                 }
 
-                // SSL cert commonName= format
-                const sslCnAltMatch = trimmed.match(HOST_PATTERNS.sslCommonNameAlt);
-                if (sslCnAltMatch && isValidHostname(sslCnAltMatch[1])) {
-                    hostSet.add(sslCnAltMatch[1].toLowerCase());
-                    const parent = extractParentDomain(sslCnAltMatch[1]);
-                    if (parent && isValidHostname(parent)) {
-                        hostSet.add(parent.toLowerCase());
+                // SSL cert commonName= format (skip Issuer lines - those are CA names, not hostnames)
+                if (!/\bIssuer:/i.test(trimmed)) {
+                    const sslCnAltMatch = trimmed.match(HOST_PATTERNS.sslCommonNameAlt);
+                    if (sslCnAltMatch && isValidHostname(sslCnAltMatch[1])) {
+                        hostSet.add(sslCnAltMatch[1].toLowerCase());
+                        const parent = extractParentDomain(sslCnAltMatch[1]);
+                        if (parent && isValidHostname(parent)) {
+                            hostSet.add(parent.toLowerCase());
+                        }
                     }
                 }
 

@@ -257,6 +257,12 @@ When printing or exporting to PDF:
 
 ## Changelog
 
+### v1.1.1
+
+**Bug Fixes:**
+- Fixed /etc/hosts generation incorrectly including Certificate Authority names from SSL Issuer lines
+- Fixed hostname case duplication in /etc/hosts output (e.g., `dc01.welcome.local` and `DC01.WELCOME.local` now correctly deduplicate)
+
 ### v1.1.0
 
 **Bug Fixes:**
