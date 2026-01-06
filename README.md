@@ -23,8 +23,9 @@ Transform raw nmap output into beautifully highlighted, easily scannable securit
 
 ### Smart Summary
 - Automatic host/port/service extraction
+- **Ports table** with version info for quick reference
 - Per-host grouping for multi-target scans
-- **/etc/hosts generation** with copy button
+- **/etc/hosts generation** with copy button and shell command
 - Critical port highlighting
 - Vulnerability aggregation
 
@@ -189,20 +190,29 @@ Click a button to hide that category. Click again to show.
 ### Per-Host Grouping
 Multi-target scans are automatically grouped by host with collapsible sections showing:
 - Open/Closed/Filtered port counts
-- Critical ports found
-- Services detected
+- **Ports table** - all open ports with service and version info
 - OS detection results
 - Vulnerabilities discovered
+
+### Ports Table
+Each host section includes a sortable ports table displaying:
+- Port/protocol (critical ports highlighted)
+- Service name
+- Version information (with scan reason/TTL data filtered out)
 
 ### /etc/hosts Generation
 Automatically extracts hostname-to-IP mappings from:
 - Scan report headers
 - Reverse DNS records
 - SMB/NetBIOS enumeration
-- SSL certificate common names
+- SSL certificate common names (excludes CA names from Issuer lines)
+- NTLM authentication info (http-ntlm-info, rdp-ntlm-info, etc.)
+- Kerberos realm information
 - Service Info fields
 
-One-click copy for adding to your `/etc/hosts` file.
+Includes:
+- One-click copy of hosts entries
+- **Ready-to-run shell command**: `echo '...' | sudo tee -a /etc/hosts`
 
 ## Theme Support
 
@@ -256,6 +266,17 @@ When printing or exporting to PDF:
 - Copy buttons hidden
 
 ## Changelog
+
+### v1.2.0
+
+**New Features:**
+- **Ports table in summary**: Expandable host sections now show all open ports with service and version information in a clean table format
+- **/etc/hosts shell command**: Summary now includes a ready-to-run command (`echo '...' | sudo tee -a /etc/hosts`) with copy button
+
+**Improvements:**
+- Version info is now cleaned of scan reason/TTL data (e.g., "syn-ack ttl 127" is filtered out, leaving only actual version strings)
+- Ports in summary table are sorted by port number
+- Critical ports are highlighted in the ports table
 
 ### v1.1.1
 

@@ -1313,9 +1313,10 @@ class NmapSyntaxHighlightPlugin extends Plugin {
             }
 
             // Extract port info (including sctp and additional states)
-            const portMatch = trimmed.match(/^(\d+)\/(tcp|udp|sctp)\s+(open|closed|filtered|open\|filtered|unfiltered|closed\|filtered)\s*(\S*)/i);
+            // Capture: port, protocol, state, service (optional), and version (everything after service)
+            const portMatch = trimmed.match(/^(\d+)\/(tcp|udp|sctp)\s+(open|closed|filtered|open\|filtered|unfiltered|closed\|filtered)(?:\s+(\S+))?(?:\s+(.+))?$/i);
             if (portMatch && currentIP) {
-                const [, port, protocol, state, service] = portMatch;
+                const [, port, protocol, state, service, rawVersion] = portMatch;
                 const portNum = parseInt(port);
                 const stateLower = state.toLowerCase();
                 const hostData = summary.perHostData.get(currentIP);
@@ -1323,11 +1324,30 @@ class NmapSyntaxHighlightPlugin extends Plugin {
                 // Defensive null check for hostData (use 'return' not 'continue' in forEach)
                 if (!hostData) return;
 
+                // Clean version string: remove reason/TTL info (e.g., "syn-ack ttl 125")
+                let version = null;
+                if (rawVersion) {
+                    const cleaned = rawVersion
+                        .replace(/^(syn-ack|ack|rst|reset|conn-refused|no-response|admin-prohibited|host-prohibited|net-prohibited|host-unreach|net-unreach|proto-unreach|port-unreach|echo-reply|timestamp-reply|udp-response|proto-response|split-handshake-syn)\s*(ttl\s*\d+)?\s*/i, '')
+                        .trim();
+                    version = cleaned || null;
+                }
+
                 if (stateLower === 'open') {
-                    hostData.openPorts.push({ port: portNum, protocol, service: service || 'unknown' });
+                    hostData.openPorts.push({
+                        port: portNum,
+                        protocol,
+                        service: service || 'unknown',
+                        version
+                    });
                     summary.totalOpenPorts++;
                     if (this.getCriticalPorts().includes(portNum)) {
-                        hostData.criticalPorts.push({ port: portNum, protocol, service: service || 'unknown' });
+                        hostData.criticalPorts.push({
+                            port: portNum,
+                            protocol,
+                            service: service || 'unknown',
+                            version
+                        });
                     }
                     if (service) {
                         hostData.services.add(service);
@@ -1443,19 +1463,32 @@ class NmapSyntaxHighlightPlugin extends Plugin {
                 portsLine.createSpan({ text: `${hostData.filteredPorts}`, cls: 'nmap-summary-filtered' });
             }
 
-            // Critical ports
-            if (hostData.criticalPorts.length > 0) {
-                const critLine = hostDetails.createDiv({ cls: 'nmap-host-line' });
-                critLine.createSpan({ text: '  Critical: ', cls: 'nmap-summary-label-indent' });
-                const critPorts = hostData.criticalPorts.map(p => `${p.port}/${p.protocol}`).join(', ');
-                critLine.createSpan({ text: critPorts, cls: 'nmap-port-critical' });
-            }
+            // Open ports table with version info
+            if (hostData.openPorts.length > 0) {
+                const portsTable = hostDetails.createDiv({ cls: 'nmap-ports-table' });
 
-            // Services
-            if (hostData.services.size > 0) {
-                const svcLine = hostDetails.createDiv({ cls: 'nmap-host-line' });
-                svcLine.createSpan({ text: '  Services: ', cls: 'nmap-summary-label-indent' });
-                svcLine.createSpan({ text: Array.from(hostData.services).join(', '), cls: 'nmap-service' });
+                // Sort ports by number
+                const sortedPorts = [...hostData.openPorts].sort((a, b) => a.port - b.port);
+
+                sortedPorts.forEach(p => {
+                    const portRow = portsTable.createDiv({ cls: 'nmap-port-row' });
+
+                    // Port/protocol
+                    const portCell = portRow.createSpan({ cls: 'nmap-port-cell' });
+                    const isCritical = this.getCriticalPorts().includes(p.port);
+                    portCell.createSpan({
+                        text: `${p.port}/${p.protocol}`,
+                        cls: isCritical ? 'nmap-port-critical' : 'nmap-port'
+                    });
+
+                    // Service
+                    portRow.createSpan({ text: p.service || '', cls: 'nmap-service-cell' });
+
+                    // Version (if present)
+                    if (p.version) {
+                        portRow.createSpan({ text: p.version, cls: 'nmap-version-cell' });
+                    }
+                });
             }
 
             // OS detection
@@ -1559,6 +1592,43 @@ class NmapSyntaxHighlightPlugin extends Plugin {
                     line.createSpan({ text: hostname, cls: 'nmap-hostname' });
                 });
             });
+
+            // Command section
+            const commandSection = etcHostsSection.createDiv({ cls: 'nmap-etc-hosts-command-section' });
+
+            const commandHeader = commandSection.createDiv({ cls: 'nmap-etc-hosts-command-header' });
+            commandHeader.createSpan({ text: 'Command', cls: 'nmap-etc-hosts-command-title' });
+
+            // Generate the command - escape single quotes in hostnames/IPs
+            const escapedLines = hostsLines.map(line => line.replace(/'/g, "'\\''"));
+            const command = escapedLines.length === 1
+                ? `echo '${escapedLines[0]}' | sudo tee -a /etc/hosts`
+                : `echo -e '${escapedLines.join('\\n')}' | sudo tee -a /etc/hosts`;
+
+            const commandCopyBtn = commandHeader.createEl('button', {
+                text: 'Copy',
+                cls: 'nmap-etc-hosts-copy'
+            });
+            commandCopyBtn.addEventListener('click', async () => {
+                try {
+                    await navigator.clipboard.writeText(command);
+                    commandCopyBtn.textContent = 'Copied!';
+                    commandCopyBtn.classList.add('copied');
+                    setTimeout(() => {
+                        commandCopyBtn.textContent = 'Copy';
+                        commandCopyBtn.classList.remove('copied');
+                    }, 2000);
+                } catch (err) {
+                    console.error('Nmap Syntax Highlight: Failed to copy command to clipboard', err);
+                    commandCopyBtn.textContent = 'Failed';
+                    setTimeout(() => {
+                        commandCopyBtn.textContent = 'Copy';
+                    }, 2000);
+                }
+            });
+
+            const commandCode = commandSection.createDiv({ cls: 'nmap-etc-hosts-command-code' });
+            commandCode.createEl('code', { text: command });
         }
     }
 }

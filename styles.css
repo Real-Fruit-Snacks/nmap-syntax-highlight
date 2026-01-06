@@ -835,6 +835,76 @@ br.nmap-line-hidden {
 }
 
 /* ==================== */
+/* Ports Table          */
+/* ==================== */
+
+.nmap-ports-table {
+    margin: 8px 0 8px 16px;
+    font-family: var(--font-monospace);
+    font-size: 0.85em;
+    line-height: 1.5;
+    background-color: var(--code-background);
+    padding: 8px 12px;
+    border-radius: 4px;
+    overflow-x: auto;
+}
+
+.nmap-port-row {
+    display: flex;
+    gap: 12px;
+    padding: 2px 0;
+    border-bottom: 1px solid var(--background-modifier-border);
+}
+
+.nmap-port-row:last-child {
+    border-bottom: none;
+}
+
+.nmap-port-cell {
+    min-width: 80px;
+    flex-shrink: 0;
+}
+
+.nmap-service-cell {
+    min-width: 100px;
+    flex-shrink: 0;
+    color: #c678dd;
+    font-weight: 500;
+}
+
+.nmap-version-cell {
+    color: #98c379;
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Light theme ports table */
+.theme-light .nmap-service-cell {
+    color: #6f42c1;
+}
+
+.theme-light .nmap-version-cell {
+    color: #22863a;
+}
+
+/* Mobile responsiveness for ports table */
+@media (max-width: 600px) {
+    .nmap-port-row {
+        flex-wrap: wrap;
+    }
+
+    .nmap-version-cell {
+        width: 100%;
+        margin-top: 2px;
+        padding-left: 92px;
+        font-size: 0.9em;
+        opacity: 0.9;
+    }
+}
+
+/* ==================== */
 /* /etc/hosts Section   */
 /* ==================== */
 
@@ -904,6 +974,43 @@ br.nmap-line-hidden {
 .nmap-etc-hosts-line .nmap-ipv6 {
     min-width: 120px;
     display: inline-block;
+}
+
+/* /etc/hosts Command Section */
+.nmap-etc-hosts-command-section {
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--background-modifier-border);
+}
+
+.nmap-etc-hosts-command-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.nmap-etc-hosts-command-title {
+    font-size: 0.85em;
+    font-weight: 600;
+    color: #abb2bf;
+    opacity: 0.9;
+}
+
+.nmap-etc-hosts-command-code {
+    font-family: var(--font-monospace);
+    font-size: 0.8em;
+    line-height: 1.5;
+    background-color: var(--code-background);
+    padding: 10px 12px;
+    border-radius: 4px;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    word-break: break-all;
+}
+
+.nmap-etc-hosts-command-code code {
+    color: #e5c07b;
 }
 
 .nmap-summary-vuln .nmap-summary-label {
@@ -1134,6 +1241,14 @@ br.nmap-line-hidden {
 
 .theme-light .nmap-etc-hosts-copy.copied {
     background-color: #22863a;
+}
+
+.theme-light .nmap-etc-hosts-command-title {
+    color: #586069;
+}
+
+.theme-light .nmap-etc-hosts-command-code code {
+    color: #735c0f;
 }
 
 /* ==================== */
